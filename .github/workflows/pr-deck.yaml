@@ -1,0 +1,14 @@
+name: Run decK on PR
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  foo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install decK
+        uses: kong/setup-deck@v1
+      - run: deck file openapi2kong --from-file=deck.yaml
+      - run: deck file lint *

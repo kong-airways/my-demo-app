@@ -1,0 +1,9 @@
+rules:
+  service-https-check:
+    description: "Ensure https usage for all upstream services"
+    given: $.services[*].protocol
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https$"

@@ -1,0 +1,39 @@
+name: Release to Dev
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-latest
+    concurrency: deploy-to-dev
+    environment:
+      name: dev
+      url: kong-32a13ef5d5usxdgf6.kongcloud.tech
+    steps:
+      - uses: actions/checkout@v4
+
+      # Make sure everything is valid
+      - name: Install decK
+        uses: kong/setup-deck@v1
+
+      # Merge local patches
+      - run: sed -i 's/-ENV/-prod/' openapi.yaml
+      - run: deck file openapi2kong --spec openapi.yaml | deck file patch .kong/patches.yaml > kong.yaml
+
+      # And merge platform enforced config
+      - run: deck file merge -o kong.yaml kong.yaml .kong/prod-global.yaml
+
+      # Lint
+      - run: deck file lint -s kong.yaml .kong/ruleset.yaml
+
+      # Sync to Konnect
+      - run: deck gateway sync kong.yaml --konnect-addr https://us.api.konghq.tech --konnect-control-plane-name my-demo-app-dev --konnect-token ${{ secrets.KONNECT_TOKEN }}
+
+      # Deploy app to fly.io
+      - name: Target dev app
+        run: sed -i 's/-TARGET/-dev/' fly.toml
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

@@ -1,0 +1,16 @@
+openapi: 3.0.0
+info:
+  title: my-demo-app API
+  description: The my-demo-app API
+  version: 0.0.1
+servers:
+  - url: https://my-demo-app-ENV.fly.dev
+paths:
+  /:
+    get:
+      operationId: hello-world
+      summary: Hello World
+      description: Endpoint that returns 'Hello World'
+      responses:
+        "200":
+          description: Successful response

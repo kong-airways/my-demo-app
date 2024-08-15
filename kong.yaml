@@ -1,0 +1,112 @@
+_format_version: "3.0"
+services:
+- host: my-demo-app-dev.fly.dev
+  id: 49756fb5-ffd6-5eb7-8081-51070fbbf94c
+  name: airline-api
+  path: /
+  plugins: []
+  port: 443
+  protocol: https
+  routes:
+  - id: 393a35a7-1161-5780-ba68-e84f0c61ebcc
+    methods:
+    - GET
+    name: airline-api_getairports
+    paths:
+    - ~/airports$
+    plugins: []
+    regex_priority: 200
+    strip_path: false
+    tags: []
+  - id: 70eab991-5bc7-5f6d-a979-652967919d93
+    methods:
+    - POST
+    name: airline-api_createairport
+    paths:
+    - ~/airports$
+    plugins: []
+    regex_priority: 200
+    strip_path: false
+    tags: []
+  - id: 7e6b3992-fd47-5233-b25c-15825be95f91
+    methods:
+    - DELETE
+    name: airline-api_deleteairportbyid
+    paths:
+    - ~/airports/(?<id>[^#?/]+)$
+    plugins: []
+    regex_priority: 100
+    strip_path: false
+    tags: []
+  - id: 42d5ecd6-ee79-5803-85fa-6ad2e1a19db9
+    methods:
+    - GET
+    name: airline-api_getairportbyid
+    paths:
+    - ~/airports/(?<id>[^#?/]+)$
+    plugins: []
+    regex_priority: 100
+    strip_path: false
+    tags: []
+  - id: 34fddb0e-2de6-53f0-8821-94e93d6d271d
+    methods:
+    - PUT
+    name: airline-api_updateairportbyid
+    paths:
+    - ~/airports/(?<id>[^#?/]+)$
+    plugins: []
+    regex_priority: 100
+    strip_path: false
+    tags: []
+  - id: 9cc4d51b-0605-5c55-bf50-b3dc4a588997
+    methods:
+    - GET
+    name: airline-api_getflights
+    paths:
+    - ~/flights$
+    plugins: []
+    regex_priority: 200
+    strip_path: false
+    tags: []
+  - id: a9ae4de3-9674-5a53-90f6-271fd19ab3bf
+    methods:
+    - POST
+    name: airline-api_createflight
+    paths:
+    - ~/flights$
+    plugins: []
+    regex_priority: 200
+    strip_path: false
+    tags: []
+  - id: 32b12a23-c435-55f9-8826-bde5578b2b5e
+    methods:
+    - DELETE
+    name: airline-api_deleteflightbyid
+    paths:
+    - ~/flights/(?<id>[^#?/]+)$
+    plugins: []
+    regex_priority: 100
+    strip_path: false
+    tags: []
+  - id: 5dd3fbbf-ea5c-594a-a15f-913fb78c2e5c
+    methods:
+    - GET
+    name: airline-api_getflightbyid
+    paths:
+    - ~/flights/(?<id>[^#?/]+)$
+    plugins: []
+    regex_priority: 100
+    strip_path: false
+    tags: []
+  - id: 1940abc0-12d6-517e-9af5-9addbdc22055
+    methods:
+    - PUT
+    name: airline-api_updateflightbyid
+    paths:
+    - ~/flights/(?<id>[^#?/]+)$
+    plugins: []
+    regex_priority: 100
+    strip_path: false
+    tags: []
+  tags: []
+upstreams: []

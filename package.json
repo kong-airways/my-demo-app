@@ -1,0 +1,27 @@
+{
+	"name": "my-demo-app",
+	"version": "0.0.1",
+	"description": "This is a demo",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo 'Not implemented yet'"
+	},
+	"directories": {
+		"test": "tests"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/kong-airways/my-demo-app.git"
+	},
+	"author": "Kong Air",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/kong-airways/my-demo-app/issues"
+	},
+	"homepage": "https://github.com/kong-airways/my-demo-app#readme",
+	"dependencies": {
+		"body-parser": "^1.20.2",
+		"dotenv": "^16.4.5",
+		"express": "^4.19.2"
+	}
+}

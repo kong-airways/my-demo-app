@@ -1,0 +1,13 @@
+_format_version: "3.0"
+_info:
+  select_tags:
+    - ci-managed
+plugins:
+  - name: rate-limiting
+    config:
+      hour: 3000
+      policy: redis
+      redis:
+        host: my.redis.host.com
+        username: my_user
+        password: demo123
