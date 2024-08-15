@@ -1,16 +1,244 @@
 openapi: 3.0.0
 info:
-  title: my-demo-app API
-  description: The my-demo-app API
-  version: 0.0.1
+  title: Airline API
+  description: A simple API for managing flights and airports.
+  version: 1.0.0
+
 servers:
-  - url: https://my-demo-app-ENV.fly.dev
+  - url: https://my-demo-app-TARGET.fly.dev
+
 paths:
-  /:
+  /flights:
     get:
-      operationId: hello-world
-      summary: Hello World
-      description: Endpoint that returns 'Hello World'
+      summary: Get all flights
+      operationId: getFlights
+      tags:
+        - Flights
       responses:
-        "200":
-          description: Successful response
+        '200':
+          description: List of flights
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flight'
+    post:
+      summary: Create a new flight
+      operationId: createFlight
+      tags:
+        - Flights
+      requestBody:
+        description: Flight to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Flight'
+      responses:
+        '201':
+          description: Flight created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flight'
+
+  /flights/{id}:
+    get:
+      summary: Get a flight by ID
+      operationId: getFlightById
+      tags:
+        - Flights
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the flight
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Flight found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flight'
+        '404':
+          description: Flight not found
+    put:
+      summary: Update a flight by ID
+      operationId: updateFlightById
+      tags:
+        - Flights
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the flight
+          schema:
+            type: integer
+      requestBody:
+        description: Flight data to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Flight'
+      responses:
+        '200':
+          description: Flight updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flight'
+        '404':
+          description: Flight not found
+    delete:
+      summary: Delete a flight by ID
+      operationId: deleteFlightById
+      tags:
+        - Flights
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the flight
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Flight deleted
+        '404':
+          description: Flight not found
+
+  /airports:
+    get:
+      summary: Get all airports
+      operationId: getAirports
+      tags:
+        - Airports
+      responses:
+        '200':
+          description: List of airports
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Airport'
+    post:
+      summary: Create a new airport
+      operationId: createAirport
+      tags:
+        - Airports
+      requestBody:
+        description: Airport to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Airport'
+      responses:
+        '201':
+          description: Airport created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Airport'
+
+  /airports/{id}:
+    get:
+      summary: Get an airport by ID
+      operationId: getAirportById
+      tags:
+        - Airports
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the airport
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Airport found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Airport'
+        '404':
+          description: Airport not found
+    put:
+      summary: Update an airport by ID
+      operationId: updateAirportById
+      tags:
+        - Airports
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the airport
+          schema:
+            type: integer
+      requestBody:
+        description: Airport data to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Airport'
+      responses:
+        '200':
+          description: Airport updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Airport'
+        '404':
+          description: Airport not found
+    delete:
+      summary: Delete an airport by ID
+      operationId: deleteAirportById
+      tags:
+        - Airports
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the airport
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Airport deleted
+        '404':
+          description: Airport not found
+
+components:
+  schemas:
+    Flight:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the flight
+        flightNumber:
+          type: string
+          description: Flight number
+        destination:
+          type: string
+          description: Destination of the flight
+
+    Airport:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the airport
+        name:
+          type: string
+          description: Name of the airport
+        city:
+          type: string
+          description: City where the airport is located
+
