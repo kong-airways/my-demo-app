@@ -1,7 +1,1 @@
-# my-demo-app
-
-Team: demo
-
-## Usage
-
-TODO: Add usage information
+This is a demo PR
