@@ -2,6 +2,3 @@
 
 Team: demo
 
-## Usage
-
-TODO: Add usage information
